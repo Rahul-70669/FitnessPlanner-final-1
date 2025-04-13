@@ -1,6 +1,9 @@
 package io.github.vanshikaa.fitnessplanner.gymnasium.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -9,8 +12,14 @@ public class WorkoutPlan {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Plan name is required")
     private String name;
+
+    @NotBlank(message = "Description is required")
+    @Size(max = 500, message = "Description can be up to 500 characters")
     private String description;
+
+    @NotBlank(message = "Level is required (Beginner/Intermediate/Advanced)")
     private String difficultyLevel;
 
     @ManyToOne
