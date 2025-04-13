@@ -4,7 +4,10 @@ package io.github.vanshikaa.fitnessplanner.gymnasium.controller;
 import io.github.vanshikaa.fitnessplanner.gymnasium.model.User;
 import io.github.vanshikaa.fitnessplanner.gymnasium.service.UserService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,33 +19,55 @@ import java.util.Optional;
 @CrossOrigin
 public class UserController {
 
-    @Autowired
-    private UserService userService;
 
-    // Register user
+    private final UserService userService;
+
+    @Autowired
+    public UserController(@Qualifier("DatabaseUserService") UserService userService) {
+        this.userService = userService;
+    }
+
+
     @PostMapping("/add")
     public ResponseEntity<User> addUser(@Valid @RequestBody User user) {
         User savedUser = userService.addUser(user);
-        return ResponseEntity.ok(savedUser);
+        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 
-    // Get user by ID
-    @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
-        Optional<User> user = userService.getUserById(id);
-        return user.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
-    }
-
-    // Get all users
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
-        return ResponseEntity.ok(userService.getAllUsers());
+
+        List<User> products = userService.getAllUsers();
+        return ResponseEntity.ok(products);
     }
 
-    // Delete user
+
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable @Positive Long id) {
+        User product = userService.getUserById(id);
+        if (product != null) {
+            return ResponseEntity.ok(product);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+
+    @GetMapping("/byName")
+    public ResponseEntity<User> getProductByName(@RequestParam String name) {
+        User product = userService.getUserByName(name);
+        if (product != null) {
+            return ResponseEntity.ok(product);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
-        return ResponseEntity.ok("User deleted successfully");
+    public ResponseEntity<String> deleteUser(@PathVariable @Positive Long id) {
+        boolean deleted = userService.deleteUser(id);
+
+        if (deleted) {
+            return ResponseEntity.ok("user deleted successfully");
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("user not found");
     }
 }
