@@ -29,7 +29,10 @@ public class User {
     @Pattern(regexp = "Male|Female|Other", message = "Gender must be Male, Female, or Other")
     private String gender;
 
+    @NotBlank(message = "height is required")
     private double height;
+
+    @NotBlank(message = "weight is required")
     private double weight;
 
     /**
