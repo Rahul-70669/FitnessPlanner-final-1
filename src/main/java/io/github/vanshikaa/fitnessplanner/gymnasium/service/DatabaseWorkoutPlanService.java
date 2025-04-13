@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service("DatabaseWorkoutPlanService")
 public class DatabaseWorkoutPlanService implements WorkoutPlanService {
 
     private final WorkoutPlanRepository workoutPlanRepository;
@@ -21,16 +21,16 @@ public class DatabaseWorkoutPlanService implements WorkoutPlanService {
     @Override
     public WorkoutPlan createWorkoutPlan(WorkoutPlan workoutPlan) {
         if(workoutPlan==null){
-            throw new UserValidationException("workoutplan must not be null");
+            throw new UserValidationException("workout plan must not be null");
         }
         return workoutPlanRepository.save(workoutPlan);
     }
 
     @Override
     public List<WorkoutPlan> getAllWorkoutPlans() {
-        List<WorkoutPlan> productList = workoutPlanRepository.findAll();
-        if (productList.isEmpty()) {
-            throw new UserNotFoundException("No user found");
+        List<WorkoutPlan> workoutList = workoutPlanRepository.findAll();
+        if (workoutList.isEmpty()) {
+            throw new UserNotFoundException("No workout plan found");
         }
         return workoutPlanRepository.findAll();
     }
@@ -38,7 +38,7 @@ public class DatabaseWorkoutPlanService implements WorkoutPlanService {
     @Override
     public WorkoutPlan getWorkoutPlanById(Long id) {
         return workoutPlanRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("user with id " + id + " not found"));    }
+                .orElseThrow(() -> new UserNotFoundException("workout plan with id " + id + " not found"));    }
 
     @Override
     public List<WorkoutPlan> getWorkoutPlansByUserId(Long userId) {
@@ -51,7 +51,7 @@ public class DatabaseWorkoutPlanService implements WorkoutPlanService {
             workoutPlanRepository.deleteById(id);
             return true;
         } else {
-            throw new UserNotFoundException("user with id " + id + " not found");
+            throw new UserNotFoundException("workout plan with id " + id + " not found");
         }
     }
 }
