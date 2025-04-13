@@ -60,7 +60,8 @@ public class DatabaseUserService implements UserService {
             return true;
         } else {
             throw new UserNotFoundException("user with id " + id + " not found");
-        }    }
+        }
+    }
 }
 
 

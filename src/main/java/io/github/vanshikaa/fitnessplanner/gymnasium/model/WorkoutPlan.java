@@ -22,9 +22,8 @@ public class WorkoutPlan {
     @NotBlank(message = "Level is required (Beginner/Intermediate/Advanced)")
     private String difficultyLevel;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+
+    private Long userId;
 
     @OneToMany(mappedBy = "workoutPlan", cascade = CascadeType.ALL)
     private List<Exercise> exercises;
@@ -33,12 +32,12 @@ public class WorkoutPlan {
     public WorkoutPlan() {
     }
 
-    public WorkoutPlan( String name, String description, String difficultyLevel, User user, List<Exercise> exercises) {
+    public WorkoutPlan( String name, String description, String difficultyLevel, Long userId, List<Exercise> exercises) {
 
         this.name = name;
         this.description = description;
         this.difficultyLevel = difficultyLevel;
-        this.user = user;
+        this.userId = userId;
         this.exercises = exercises;
     }
 
@@ -74,12 +73,13 @@ public class WorkoutPlan {
         this.difficultyLevel = difficultyLevel;
     }
 
-    public User getUser() {
-        return user;
+    public Long
+    getUser() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(Long userId) {
+        this.userId = userId;
     }
 
     public List<Exercise> getExercises() {
@@ -94,12 +94,12 @@ public class WorkoutPlan {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         WorkoutPlan that = (WorkoutPlan) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(difficultyLevel, that.difficultyLevel) && Objects.equals(user, that.user) && Objects.equals(exercises, that.exercises);
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(difficultyLevel, that.difficultyLevel) && Objects.equals(userId, that.userId) && Objects.equals(exercises, that.exercises);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, difficultyLevel, user, exercises);
+        return Objects.hash(id, name, description, difficultyLevel, userId, exercises);
     }
 
     @Override
@@ -109,7 +109,7 @@ public class WorkoutPlan {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", difficultyLevel='" + difficultyLevel + '\'' +
-                ", user=" + user +
+                ", userId=" + userId +
                 ", exercises=" + exercises +
                 '}';
     }
