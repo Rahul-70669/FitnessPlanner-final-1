@@ -6,6 +6,18 @@ import jakarta.validation.constraints.*;
 import java.util.List;
 import java.util.Objects;
 
+
+/**
+ * Manages the user data.
+ * @NotBlank the name of the field cannot be empty.
+ * Positive represents that the number input should be positive
+ * POJO class made for the user which includes:
+ * Constructor with no arguments
+ * Constructor with arguments
+ * Getter&Setter
+ * Equalsto() and Hashcode()
+ * toString()
+ */
 @Entity
 public class User {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

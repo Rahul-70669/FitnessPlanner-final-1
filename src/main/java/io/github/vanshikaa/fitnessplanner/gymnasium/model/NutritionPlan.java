@@ -4,6 +4,17 @@ import jakarta.persistence.*;
 
 import java.util.Objects;
 
+/**
+ *Manages the NutritionPlan class according to the user preferance.
+ * @NotBlank the name of the field cannot be empty.
+ * Positive represents that the number input should be positive
+ * POJO class made for the NutritionPlan which includes:
+ * Constructor with no arguments
+ * Constructor with arguments
+ * Getter&Setter
+ * Equalsto() and Hashcode()
+ * toString()
+ */
 @Entity
 public class NutritionPlan {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,6 +25,10 @@ public class NutritionPlan {
     private double carbs;
     private double fats;
 
+
+    /**
+     * One user can have only one or unique diet plan/workoutplan/etc.
+     */
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;

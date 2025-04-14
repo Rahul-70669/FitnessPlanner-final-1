@@ -10,16 +10,34 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * A sevice class that uses database to store and manage user information.
+ * This class implements the userService interface and uses of user repository to perform operations on the database.
+ */
 @Service("DatabaseUserService")
 public class DatabaseUserService implements UserService {
 
+    /**
+     * The repository used to access the database.
+     */
     private final UserRepository userRepository;
+
+    /**
+     * Creates a new DatabaseUserService with the provided repository.
+     *
+     * @param userRepository the repository to use for database operations
+     */
     @Autowired
     public DatabaseUserService(UserRepository userRepository) {
 
         this.userRepository = userRepository;
     }
-
+    /**
+     * Adds a new user to the database.
+     *
+     * @param user the user to add
+     * @return the saved user with any database-generated values (like ID)
+     */
     @Override
     public User addUser(User user) {
         if(user==null){
@@ -28,6 +46,11 @@ public class DatabaseUserService implements UserService {
         return userRepository.save(user);
     }
 
+    /**
+     * Gets a list of all users from the database.
+     *
+     * @return a list containing all user.
+     */
     @Override
     public List<User> getAllUsers() {
 
@@ -38,6 +61,12 @@ public class DatabaseUserService implements UserService {
         return userRepository.findAll();
     }
 
+    /**
+     * Finds a user in the database using its ID.
+     *
+     * @param id the ID of the user to find
+     * @return the found user, or null if no user exists with the given ID
+     */
     @Override
     public User getUserById(Long id) {
 
@@ -45,6 +74,12 @@ public class DatabaseUserService implements UserService {
                 .orElseThrow(() -> new UserNotFoundException("user with id " + id + " not found"));    }
 
 
+    /**
+     * Finds a user in the database using its name.
+     *
+     * @param name the name of the user to find
+     * @return the found user, or null if no user exists with the given name
+     */
     @Override
     public User getUserByName(String name) {
 
@@ -52,6 +87,13 @@ public class DatabaseUserService implements UserService {
                 .orElseThrow(() -> new UserNotFoundException("user with name " + name + " not found"));
            }
 
+    /**
+     * Updates the name of a user in the database.
+     *
+     * @param id the ID of the user to update
+     * @param  height the new height to set
+     * @return the updated user info, or null if no user exists with the given ID
+     */
     @Override
     public User updateUserHeight(Long id, double height) {
         if(height<=100){
@@ -65,6 +107,13 @@ public class DatabaseUserService implements UserService {
         return null;
     }
 
+    /**
+     * Updates the name of a user in the database.
+     *
+     * @param id the ID of the user to update
+     * @param  weight the new weight to set
+     * @return the updated user info, or null if no user exists with the given ID
+     */
     @Override
     public User updateUserWeight(Long id, double weight) {
         if(weight<=20){
@@ -78,6 +127,13 @@ public class DatabaseUserService implements UserService {
         return null;
     }
 
+    /**
+     * Updates the name of a user in the database.
+     *
+     * @param id the ID of the user to update
+     * @param  transformationtype the new type to set
+     * @return the updated user info, or null if no user exists with the given ID
+     */
     @Override
     public User updateUsertransformationtype(Long id, String transformationtype) {
         if(transformationtype==null || transformationtype.isEmpty() || transformationtype.equals("Gaining/Leaning")){
@@ -93,6 +149,12 @@ public class DatabaseUserService implements UserService {
     }
 
 
+    /**
+     * Deletes a user from the database.
+     *
+     * @param id the ID of the user to delete
+     * @return true if a user was deleted, false if no user exists with the given ID
+     */
     @Override
     public boolean deleteUser(Long id) {
 

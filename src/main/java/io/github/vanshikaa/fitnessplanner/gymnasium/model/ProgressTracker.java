@@ -4,6 +4,18 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
+
+/**
+ *Manages the ProgrssTracker class according to the user performance.
+ * @NotBlank the name of the field cannot be empty.
+ * Positive represents that the number input should be positive
+ * POJO class made for the ProgrssTracker which includes:
+ * Constructor with no arguments
+ * Constructor with arguments
+ * Getter&Setter
+ * Equalsto() and Hashcode()
+ * toString()
+ */
 @Entity
 public class ProgressTracker {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,6 +25,10 @@ public class ProgressTracker {
     private double weight;
     private double bodyFatPercentage;
 
+
+    /**
+     * Many users can have same progress report according to their performance.
+     */
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

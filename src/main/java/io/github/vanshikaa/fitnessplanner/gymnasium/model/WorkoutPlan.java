@@ -7,6 +7,18 @@ import jakarta.validation.constraints.Size;
 import java.util.List;
 import java.util.Objects;
 
+
+/**
+ *Manages the workout plan according to their transformation type,height and weight.
+ * @NotBlank the name of the field cannot be empty.
+ * Positive represents that the number input should be positive
+ * POJO class made for the workout plan which includes:
+ * Constructor with no arguments
+ * Constructor with arguments
+ * Getter&Setter
+ * Equalsto() and Hashcode()
+ * toString()
+ */
 @Entity
 public class WorkoutPlan {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -4,6 +4,17 @@ import jakarta.persistence.*;
 
 import java.util.Objects;
 
+/**
+ *Manages the Exercise class according to the workoutPlan of the user.
+ * @NotBlank the name of the field cannot be empty.
+ * Positive represents that the number input should be positive
+ * POJO class made for the Exercise which includes:
+ * Constructor with no arguments
+ * Constructor with arguments
+ * Getter&Setter
+ * Equalsto() and Hashcode()
+ * toString()
+ */
 @Entity
 public class Exercise {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,6 +26,9 @@ public class Exercise {
     private int sets;
     private int reps;
 
+    /**
+     * Many workoutplans can have same set of exercises.
+     */
     @ManyToOne
     @JoinColumn(name = "workout_plan_id")
     private WorkoutPlan workoutPlan;
