@@ -29,10 +29,10 @@ public class User {
     @Pattern(regexp = "Male|Female|Other", message = "Gender must be Male, Female, or Other")
     private String gender;
 
-    @NotBlank(message = "height is required")
+    @Min(value = 140, message = "height must be at least 140cm")
     private double height;
 
-    @NotBlank(message = "weight is required")
+    @Min(value = 40, message = "weight must be at least 40kg")
     private double weight;
 
     /**
@@ -40,8 +40,6 @@ public class User {
      */
     private String healthissue;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<WorkoutPlan> workoutPlans;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<ProgressTracker> progressTrackers;
@@ -62,7 +60,6 @@ public class User {
         this.gender = gender;
         this.height = height;
         this.weight = weight;
-        this.workoutPlans = workoutPlans;
         this.progressTrackers = progressTrackers;
         this.nutritionPlan = nutritionPlan;
         this.healthissue = healthissue;
@@ -132,14 +129,6 @@ public class User {
         this.weight = weight;
     }
 
-    public List<WorkoutPlan> getWorkoutPlans() {
-        return workoutPlans;
-    }
-
-    public void setWorkoutPlans(List<WorkoutPlan> workoutPlans) {
-        this.workoutPlans = workoutPlans;
-    }
-
     public List<ProgressTracker> getProgressTrackers() {
         return progressTrackers;
     }
@@ -168,12 +157,12 @@ public class User {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return age == user.age && Double.compare(height, user.height) == 0 && Double.compare(weight, user.weight) == 0 && Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(gender, user.gender) && Objects.equals(workoutPlans, user.workoutPlans) && Objects.equals(progressTrackers, user.progressTrackers) && Objects.equals(nutritionPlan, user.nutritionPlan) && Objects.equals(healthissue, user.healthissue);
+        return age == user.age && Double.compare(height, user.height) == 0 && Double.compare(weight, user.weight) == 0 && Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(gender, user.gender) && Objects.equals(progressTrackers, user.progressTrackers) && Objects.equals(nutritionPlan, user.nutritionPlan) && Objects.equals(healthissue, user.healthissue);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email, password, age, gender, height, weight, workoutPlans, progressTrackers, nutritionPlan, healthissue);
+        return Objects.hash(id, name, email, password, age, gender, height, weight, progressTrackers, nutritionPlan, healthissue);
     }
 
     @Override
@@ -187,7 +176,6 @@ public class User {
                 ", gender='" + gender + '\'' +
                 ", height=" + height +
                 ", weight=" + weight +
-                ", workoutPlans=" + workoutPlans +
                 ", progressTrackers=" + progressTrackers +
                 ", nutritionPlan=" + nutritionPlan +
                 ", healthissue='" + healthissue + '\'' +

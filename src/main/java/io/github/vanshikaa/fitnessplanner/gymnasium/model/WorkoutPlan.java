@@ -25,8 +25,8 @@ public class WorkoutPlan {
 
     private Long userId;
 
-    @OneToMany(mappedBy = "workoutPlan", cascade = CascadeType.ALL)
-    private List<Exercise> exercises;
+//    @OneToMany(mappedBy = "workoutPlan", cascade = CascadeType.ALL)
+//    private List<Exercise> exercises;
 
 
     public WorkoutPlan() {
@@ -38,7 +38,7 @@ public class WorkoutPlan {
         this.description = description;
         this.difficultyLevel = difficultyLevel;
         this.userId = userId;
-        this.exercises = exercises;
+//        this.exercises = exercises;
     }
 
     public Long getId() {
@@ -82,24 +82,24 @@ public class WorkoutPlan {
         this.userId = userId;
     }
 
-    public List<Exercise> getExercises() {
-        return exercises;
-    }
-
-    public void setExercises(List<Exercise> exercises) {
-        this.exercises = exercises;
-    }
+//    public List<Exercise> getExercises() {
+//        return exercises;
+//    }
+//
+//    public void setExercises(List<Exercise> exercises) {
+//        this.exercises = exercises;
+//    }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         WorkoutPlan that = (WorkoutPlan) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(difficultyLevel, that.difficultyLevel) && Objects.equals(userId, that.userId) && Objects.equals(exercises, that.exercises);
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(difficultyLevel, that.difficultyLevel) && Objects.equals(userId, that.userId)              ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, difficultyLevel, userId, exercises);
+        return Objects.hash(id, name, description, difficultyLevel, userId);
     }
 
     @Override
@@ -110,7 +110,7 @@ public class WorkoutPlan {
                 ", description='" + description + '\'' +
                 ", difficultyLevel='" + difficultyLevel + '\'' +
                 ", userId=" + userId +
-                ", exercises=" + exercises +
+//                ", exercises=" + exercises +
                 '}';
     }
 }
