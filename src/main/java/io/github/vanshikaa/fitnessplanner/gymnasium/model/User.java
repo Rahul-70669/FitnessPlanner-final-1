@@ -29,16 +29,19 @@ public class User {
     @Pattern(regexp = "Male|Female|Other", message = "Gender must be Male, Female, or Other")
     private String gender;
 
-    @Min(value = 140, message = "height must be at least 140cm")
+    @Min(value = 100, message = "height must be at least 100cm")
     private double height;
 
-    @Min(value = 40, message = "weight must be at least 40kg")
+    @Min(value = 20, message = "weight must be at least 20kg")
     private double weight;
 
     /**
      * Mention here if suffering from any sort of disorder or health issue and related problems.
      */
     private String healthissue;
+
+    @NotBlank(message = "Type is required (Gaining/Leaning)")
+    private String transformationtype;
 
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
@@ -48,10 +51,11 @@ public class User {
     private NutritionPlan nutritionPlan;
 
     public User() {
-
     }
 
-    public User( String name, String email, String password, int age, String gender, double height, double weight, List<WorkoutPlan> workoutPlans, List<ProgressTracker> progressTrackers, NutritionPlan nutritionPlan ,String healthissue ) {
+
+
+    public User(String name, String email, String password, int age, String gender, double height, double weight, List<WorkoutPlan> workoutPlans, List<ProgressTracker> progressTrackers, NutritionPlan nutritionPlan , String healthissue, String transformationtype) {
 
         this.name = name;
         this.email = email;
@@ -63,6 +67,15 @@ public class User {
         this.progressTrackers = progressTrackers;
         this.nutritionPlan = nutritionPlan;
         this.healthissue = healthissue;
+        this.transformationtype = transformationtype;
+    }
+
+    public String getTransformationtype() {
+        return transformationtype;
+    }
+
+    public void setTransformationtype(String transformationtype) {
+        this.transformationtype = transformationtype;
     }
 
     public Long getId() {
@@ -157,12 +170,12 @@ public class User {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return age == user.age && Double.compare(height, user.height) == 0 && Double.compare(weight, user.weight) == 0 && Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(gender, user.gender) && Objects.equals(progressTrackers, user.progressTrackers) && Objects.equals(nutritionPlan, user.nutritionPlan) && Objects.equals(healthissue, user.healthissue);
+        return age == user.age && Double.compare(height, user.height) == 0 && Double.compare(weight, user.weight) == 0 && Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(gender, user.gender) && Objects.equals(progressTrackers, user.progressTrackers) && Objects.equals(nutritionPlan, user.nutritionPlan) && Objects.equals(healthissue, user.healthissue) &&  Objects.equals(transformationtype, user.transformationtype);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email, password, age, gender, height, weight, progressTrackers, nutritionPlan, healthissue);
+        return Objects.hash(id, name, email, password, age, gender, height, weight, progressTrackers, nutritionPlan, healthissue, transformationtype);
     }
 
     @Override
@@ -179,6 +192,7 @@ public class User {
                 ", progressTrackers=" + progressTrackers +
                 ", nutritionPlan=" + nutritionPlan +
                 ", healthissue='" + healthissue + '\'' +
+                ", transformationtype='" + transformationtype + '\'' +
                 '}';
     }
 

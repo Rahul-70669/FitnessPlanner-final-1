@@ -25,20 +25,30 @@ public class WorkoutPlan {
 
     private Long userId;
 
-//    @OneToMany(mappedBy = "workoutPlan", cascade = CascadeType.ALL)
-//    private List<Exercise> exercises;
+    @NotBlank(message = "Type is required (Gaining/Leaning)")
+    private String transformationtype;
+
 
 
     public WorkoutPlan() {
     }
 
-    public WorkoutPlan( String name, String description, String difficultyLevel, Long userId, List<Exercise> exercises) {
+    public WorkoutPlan( String name, String description, String difficultyLevel, Long userId,String transformationtype) {
 
         this.name = name;
         this.description = description;
         this.difficultyLevel = difficultyLevel;
         this.userId = userId;
-//        this.exercises = exercises;
+        this.transformationtype = transformationtype;
+
+    }
+
+    public String getTransformationtype() {
+        return transformationtype;
+    }
+
+    public void setTransformationtype(String transformationtype) {
+        this.transformationtype = transformationtype;
     }
 
     public Long getId() {
@@ -74,32 +84,25 @@ public class WorkoutPlan {
     }
 
     public Long
-    getUser() {
+    getUserId() {
         return userId;
     }
 
-    public void setUser(Long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
-//    public List<Exercise> getExercises() {
-//        return exercises;
-//    }
-//
-//    public void setExercises(List<Exercise> exercises) {
-//        this.exercises = exercises;
-//    }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         WorkoutPlan that = (WorkoutPlan) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(difficultyLevel, that.difficultyLevel) && Objects.equals(userId, that.userId)              ;
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(difficultyLevel, that.difficultyLevel) && Objects.equals(userId, that.userId) && Objects.equals(transformationtype, that.transformationtype)              ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, difficultyLevel, userId);
+        return Objects.hash(id, name, description, difficultyLevel, userId , transformationtype);
     }
 
     @Override
@@ -110,7 +113,7 @@ public class WorkoutPlan {
                 ", description='" + description + '\'' +
                 ", difficultyLevel='" + difficultyLevel + '\'' +
                 ", userId=" + userId +
-//                ", exercises=" + exercises +
+                ", transformationtype" + transformationtype +
                 '}';
     }
 }

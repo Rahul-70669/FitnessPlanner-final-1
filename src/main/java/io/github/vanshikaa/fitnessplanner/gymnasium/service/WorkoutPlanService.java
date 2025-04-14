@@ -13,5 +13,9 @@ public interface WorkoutPlanService {
 
     List<WorkoutPlan> getWorkoutPlansByUserId(Long userId);
 
+    WorkoutPlan updateDescription(Long userId, WorkoutPlan workoutPlan);
+
+    WorkoutPlan updateUserId(Long id, long userId);
+
     boolean deleteWorkoutPlan(Long id);
 }

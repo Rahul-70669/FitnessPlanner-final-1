@@ -13,5 +13,11 @@ public interface UserService {
 
     User getUserByName(String name);
 
+    User updateUserHeight(Long id ,double height);
+
+    User updateUserWeight(Long id ,double weight);
+
+    User updateUsertransformationtype(Long id ,String transformationtype);
+
     boolean deleteUser(Long id);
 }

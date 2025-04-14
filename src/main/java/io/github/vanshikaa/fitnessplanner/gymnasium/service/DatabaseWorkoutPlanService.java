@@ -45,6 +45,22 @@ public class DatabaseWorkoutPlanService implements WorkoutPlanService {
         return workoutPlanRepository.findByUserId(userId);
     }
 
+
+    @Override
+    public WorkoutPlan updateDescription(Long userId, WorkoutPlan workoutPlan) {
+        WorkoutPlan workoutPlanToUpdate = workoutPlanRepository.findById(workoutPlan.getUserId()).get();
+        workoutPlanToUpdate.setDescription(workoutPlan.getDescription());
+        return workoutPlanRepository.save(workoutPlanToUpdate);
+    }
+
+    @Override
+    public WorkoutPlan updateUserId(Long id, long userId) {
+        WorkoutPlan workoutPlanToUpdate = workoutPlanRepository.findById(id).get();
+        workoutPlanToUpdate.setUserId(userId);
+        workoutPlanRepository.save(workoutPlanToUpdate);
+        return workoutPlanRepository.save(workoutPlanToUpdate);
+    }
+
     @Override
     public boolean deleteWorkoutPlan(Long id) {
         if (workoutPlanRepository.existsById(id)) {

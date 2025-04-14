@@ -4,7 +4,9 @@ package io.github.vanshikaa.fitnessplanner.gymnasium.controller;
 import io.github.vanshikaa.fitnessplanner.gymnasium.model.User;
 import io.github.vanshikaa.fitnessplanner.gymnasium.service.UserService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -60,6 +62,37 @@ public class UserController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @PutMapping("/height/{id}")
+    public ResponseEntity<User> updateUserheight(@PathVariable @Positive Long id,
+                                                 @RequestParam @Min(value = 100)double height) {
+        User product = userService.updateUserHeight(id, height);
+        if (product != null) {
+            return ResponseEntity.ok(product);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @PutMapping("/weight/{id}")
+    public ResponseEntity<User> updateUserWeight(@PathVariable @Positive Long id,
+                                                 @RequestParam @Min(value = 20)double weight) {
+        User product = userService.updateUserWeight(id, weight);
+        if (product != null) {
+            return ResponseEntity.ok(product);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @PutMapping("/byName/{id}")
+    public ResponseEntity<User> updateUserTransformationtype(@PathVariable @Positive Long id,
+                                                             @RequestParam @Size(min=7,max=7) String transformationtype) {
+        User product = userService.updateUsertransformationtype(id, transformationtype);
+        if (product != null) {
+            return ResponseEntity.ok(product);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable @Positive Long id) {

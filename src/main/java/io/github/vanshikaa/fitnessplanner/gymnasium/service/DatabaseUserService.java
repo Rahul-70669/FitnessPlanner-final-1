@@ -53,6 +53,47 @@ public class DatabaseUserService implements UserService {
            }
 
     @Override
+    public User updateUserHeight(Long id, double height) {
+        if(height<=100){
+            throw new UserValidationException("height must be at least 100cm");
+        }
+        User user = getUserById(id);
+        if(user!=null){
+            user.setHeight(height);
+            return userRepository.save(user);
+        }
+        return null;
+    }
+
+    @Override
+    public User updateUserWeight(Long id, double weight) {
+        if(weight<=20){
+            throw new UserValidationException("weight must be at least 20kg");
+        }
+        User user = getUserById(id);
+        if(user!=null){
+            user.setWeight(weight);
+            return userRepository.save(user);
+        }
+        return null;
+    }
+
+    @Override
+    public User updateUsertransformationtype(Long id, String transformationtype) {
+        if(transformationtype==null || transformationtype.isEmpty() || transformationtype.equals("Gaining/Leaning")){
+            throw new UserValidationException("Type is required (Gaining/Leaning)");
+        }
+        User user = getUserById(id);
+        if(user!=null){
+            user.setTransformationtype(transformationtype);
+            return userRepository.save(user);
+        }
+        return null;
+
+    }
+
+
+    @Override
     public boolean deleteUser(Long id) {
 
         if (userRepository.existsById(id)) {

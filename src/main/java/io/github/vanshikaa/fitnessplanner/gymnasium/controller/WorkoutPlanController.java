@@ -53,6 +53,18 @@ public class WorkoutPlanController {
         return ResponseEntity.ok(workoutPlanService.getWorkoutPlansByUserId(userId));
     }
 
+    @PutMapping("/user/{userId}")
+    public ResponseEntity<WorkoutPlan> updateDescription(@PathVariable @Positive Long userId, @Valid @RequestBody WorkoutPlan workoutPlan) {
+        WorkoutPlan Work=workoutPlanService.updateDescription(userId, workoutPlan);
+        return ResponseEntity.ok(Work);
+    }
+
+    @PutMapping("/userId/{id}")
+    public ResponseEntity<WorkoutPlan> updateuserId(@PathVariable @Positive Long id, @Valid @RequestParam Long userId) {
+        WorkoutPlan workoutPlan = workoutPlanService.updateUserId(id, userId);
+        return ResponseEntity.ok(workoutPlan);
+    }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable @Positive Long id) {
