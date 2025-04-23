@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Fitness Planner</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header class="main-header">
+    <h1>💪 Fitness Planner Dashboard</h1>
+    <p>Your complete tool for managing users and workout plans</p>
+</header>
+<header>
+
+    <nav>
+        <button id="showUsers">Users</button>
+        <button id="showPlans">Workout Plans</button>
+    </nav>
+</header>
+
+<div class="container">
+    <!-- USERS SECTION -->
+    <section id="userSection">
+        <h1>User Management</h1>
+        <form id="userForm">
+            <input type="text" id="name" placeholder="Name" required />
+            <input type="email" id="email" placeholder="Email" required />
+            <input type="password" id="password" placeholder="Password" required />
+            <input type="number" id="age" placeholder="Age (13–70)" min="13" max="70" required />
+            <select id="gender" required>
+                <option value="">Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+            </select>
+            <input type="number" id="height" placeholder="Height (cm ≥100)" min="100" required />
+            <input type="number" id="weight" placeholder="Weight (kg ≥20)" min="20" required />
+            <input type="text" id="healthissue" placeholder="Health Issue (optional)" />
+            <select id="transformationtype" required>
+                <option value="">Transformation Type</option>
+                <option>Gaining</option>
+                <option>Leaning</option>
+            </select>
+            <button type="submit">Add User</button>
+        </form>
+
+        <div class="search-bar">
+            <input type="number" id="searchUserId" placeholder="Search by ID" />
+            <button id="btnSearchUserById">Go</button>
+            <input type="text" id="searchUserName" placeholder="Search by Name" />
+            <button id="btnSearchUserByName">Go</button>
+        </div>
+        <div id="userSearchResult"></div>
+
+        <h2>All Users</h2>
+        <div id="userList"></div>
+    </section>
+
+    <!-- PLANS SECTION -->
+    <section id="planSection" style="display:none;">
+        <h1>Workout Plan Management</h1>
+        <form id="planForm">
+            <input type="text" id="planName" placeholder="Plan Name" required />
+            <textarea id="planDescription" placeholder="Description" required></textarea>
+            <select id="difficultyLevel" required>
+                <option value="">Difficulty Level</option>
+                <option>Beginner</option>
+                <option>Intermediate</option>
+                <option>Advanced</option>
+            </select>
+            <input type="number" id="planUserId" placeholder="User ID" required />
+            <select id="planTransformationType" required>
+                <option value="">Transformation Type</option>
+                <option>Gaining</option>
+                <option>Leaning</option>
+            </select>
+            <button type="submit">Add Plan</button>
+        </form>
+
+        <div class="search-bar">
+            <input type="number" id="searchPlanId" placeholder="Search by Plan ID" />
+            <button id="btnSearchPlanById">Go</button>
+            <input type="number" id="searchPlansByUserId" placeholder="Search by User ID" />
+            <button id="btnSearchPlanByUserId">Go</button>
+        </div>
+        <div id="planSearchResult"></div>
+
+        <h2>All Plans</h2>
+        <div id="planList"></div>
+    </section>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

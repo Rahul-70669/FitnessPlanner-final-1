@@ -63,6 +63,7 @@ public class DatabaseWorkoutPlanService implements WorkoutPlanService {
 
     @Override
     public List<WorkoutPlan> getWorkoutPlansByUserId(Long userId) {
+
         return workoutPlanRepository.findByUserId(userId);
     }
 
